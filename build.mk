@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 TARGETS = \
+	LPCXpresso55S69 \
 	Microbit \
 	Microbitv2 \
 
