@@ -1,0 +1,61 @@
+name: Build
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: zephyrprojectrtos/ci:v0.21.0
+    env:
+      CMAKE_PREFIX_PATH: /opt/toolchains
+      ZEPHYR_TOOLCHAIN_VARIANT: gnuarmemb
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: zdv
+
+      - name:  dependencies
+        run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          echo "/usr/lib/ccache" >> $GITHUB_PATH
+          for i in $GNUARMEMB_TOOLCHAIN_PATH/bin/* ; do sudo ln -s /usr/bin/ccache /usr/lib/ccache/$(basename $i); done
+          ccache --set-config=cache_dir="$GITHUB_WORKSPACE"
+          ccache --set-config=cache_dir="$GITHUB_WORKSPACE/.ccache"
+          ccache --set-config=max_size=2Gi
+          ccache -z -s
+          $GNUARMEMB_TOOLCHAIN_PATH/bin/arm-none-eabi-gcc -v | tee log.txt
+          (cd zdv ; git status; git log -1)>> log.txt
+
+      - name: Cache
+        id:   cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            .ccache
+            bootloader
+            modules
+            tools
+            zephyr
+          key: ${{ runner.os }}-ccache-${{ hashFiles('log.txt') }}
+          restore-keys: ${{ runner.os }}-ccache-
+
+      - name: Initialize
+        run: |
+          pip3 install -U west
+          west init -l zdv
+          west update
+          pip3 install -r zephyr/scripts/requirements-base.txt
+
+      - name: Compile
+        run:  |
+          make -f zdv/build.mk
+          ccache -s
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-${{github.run_number}}
+          path: |
+            dist/*
