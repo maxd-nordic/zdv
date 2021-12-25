@@ -5,19 +5,27 @@ TARGETS = \
 	Microbitv2 \
 
 DIST = dist
-DEPS = zdv/src/main.c \
+DEPS = \
 	zdv/CMakeLists.txt \
 	zdv/aliases.cmake \
-	zdv/prj.conf
+	zdv/build.mk \
+	zdv/prj.conf \
+	zdv/src/main.c \
+	$(wildcard zdv/boards/*.conf)
 
+BUILD_OPTIONS = -p auto
+
+.PHONY:
 all: $(patsubst %, $(DIST)/%.hex, $(TARGETS))
 
-$(DIST)/%.hex: builds/%/zephyr/zephyr.hex
+.SECONDARY:
+$(DIST)/%.hex: builds/%/zephyr/zephyr.hex $(DEPS)
 	@mkdir -p $(DIST)
 	cp $< $@
 	cp builds/$*/zephyr/zephyr.bin $(DIST)/$*.bin
 
-.PRECIOUS: builds/%/zephyr/zephyr.hex
+.SECONDARY:
 builds/%/zephyr/zephyr.hex: $(DEPS)
 	ZEPHYR_BOARD_ALIASES=$(abspath zdv/aliases.cmake) \
-		west build -b $* zdv --pristine -d builds/$*
+		west build -b $* -d builds/$* $(BUILD_OPTIONS) zdv
+	@touch $@
