@@ -3,6 +3,9 @@ TARGETS = \
 	LPCXpresso55S69 \
 	Microbit \
 	Microbitv2 \
+	Nordic-nRF51-DK \
+	Nordic-nRF52-DK \
+	Nordic-nRF52840-DK \
 
 DIST = dist
 DEPS = \
