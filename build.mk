@@ -3,8 +3,11 @@ TARGETS = \
 	LPCXpresso55S69 \
 	Microbit \
 	Microbitv2 \
+	MIMXRT1020 \
 	MIMXRT1050-QSPI \
 	MIMXRT1050-HYPER \
+	MIMXRT1060 \
+	MIMXRT1170 \
 	Nordic-nRF51-DK \
 	Nordic-nRF52-DK \
 	Nordic-nRF52840-DK \
