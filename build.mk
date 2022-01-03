@@ -30,7 +30,7 @@ all: $(patsubst %, $(DIST)/%.hex, $(TARGETS))
 $(DIST)/%.hex: builds/%/zephyr/zephyr.hex $(DEPS)
 	@mkdir -p $(DIST)
 	cp $< $@
-	cp builds/$*/zephyr/zephyr.bin $(DIST)/$*.bin
+	arm-none-eabi-objcopy -O binary --gap-fill=0xff builds/$*/zephyr/zephyr.elf $(DIST)/$*.bin
 
 .SECONDARY:
 builds/%/zephyr/zephyr.hex: $(DEPS)
