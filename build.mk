@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: Apache-2.0
 TARGETS = \
+	FRDM-K22F \
+	FRDM-K64F \
+	FRDM-K82F \
 	LPCXpresso55S69 \
 	Microbit \
 	Microbitv2 \
