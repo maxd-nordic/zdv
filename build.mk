@@ -13,6 +13,7 @@ TARGETS = \
 	Nordic-nRF51-DK \
 	Nordic-nRF52-DK \
 	Nordic-nRF52840-DK \
+	ST-Nucleo-F207ZG \
 
 DIST = dist
 DEPS = \
