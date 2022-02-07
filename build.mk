@@ -3,6 +3,7 @@ TARGETS = \
 	FRDM-K22F \
 	FRDM-K64F \
 	FRDM-K82F \
+	LPCXpresso54114 \
 	LPCXpresso55S69 \
 	Microbit \
 	Microbitv2 \
