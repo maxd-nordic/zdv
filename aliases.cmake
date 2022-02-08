@@ -3,6 +3,8 @@
 set(FRDM-K22F_BOARD_ALIAS frdm_k22f)
 set(FRDM-K64F_BOARD_ALIAS frdm_k64f)
 set(FRDM-K82F_BOARD_ALIAS frdm_k82f)
+set(FRDM-KW41Z_BOARD_ALIAS frdm_kw41z)
+set(KL25Z_BOARD_ALIAS frdm_kl25z)
 set(LPCXpresso54114_BOARD_ALIAS lpcxpresso54114_m4)
 set(LPCXpresso55S69_BOARD_ALIAS lpcxpresso55s69_cpu0)
 set(Microbit_BOARD_ALIAS bbc_microbit)
