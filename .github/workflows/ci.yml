@@ -50,7 +50,7 @@ jobs:
 
       - name: Compile
         run:  |
-          make -f zdv/build.mk
+          make -f zdv/build.mk OBJCOPY=$GNUARMEMB_TOOLCHAIN_PATH/bin/arm-none-eabi-objcopy
           ccache -s
 
       - name: Upload test artifacts

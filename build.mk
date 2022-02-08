@@ -25,6 +25,7 @@ DEPS = \
 	zdv/src/main.c \
 	$(wildcard zdv/boards/*.conf)
 
+OBJCOPY = arm-none-eabi-objcopy
 BUILD_OPTIONS = -p auto
 
 .PHONY:
@@ -34,7 +35,7 @@ all: $(patsubst %, $(DIST)/%.hex, $(TARGETS))
 $(DIST)/%.hex: builds/%/zephyr/zephyr.hex $(DEPS)
 	@mkdir -p $(DIST)
 	cp $< $@
-	arm-none-eabi-objcopy -O binary --gap-fill=0xff builds/$*/zephyr/zephyr.elf $(DIST)/$*.bin
+	$(OBJCOPY) -O binary --gap-fill=0xff builds/$*/zephyr/zephyr.elf $(DIST)/$*.bin
 
 .SECONDARY:
 builds/%/zephyr/zephyr.hex: $(DEPS)
