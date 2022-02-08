@@ -24,6 +24,10 @@ void main(void)
     }
     uart_config_get(uart, &cfg);
 
+#if defined(CONFIG_STARTUP_SLEEP) && (CONFIG_STARTUP_SLEEP > 0)
+    k_busy_wait(CONFIG_STARTUP_SLEEP);
+#endif
+
     printf("{init}");
 
     while (1) {

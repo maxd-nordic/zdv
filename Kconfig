@@ -1,0 +1,5 @@
+config STARTUP_SLEEP
+        int "Number of microseconds to sleep at start-up"
+        default 0
+
+source "Kconfig.zephyr"
