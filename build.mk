@@ -38,6 +38,9 @@ $(DIST)/%.hex: builds/%/zephyr/zephyr.hex $(DEPS)
 	@mkdir -p $(DIST)
 	cp $< $@
 	$(OBJCOPY) -O binary --gap-fill=0xff builds/$*/zephyr/zephyr.elf $(DIST)/$*.bin
+	if [ -f builds/$*/zephyr/zephyr.uf2 ] ; then \
+		cp builds/$*/zephyr/zephyr.uf2 $(DIST)/$*.uf2 ; \
+	fi
 
 .SECONDARY:
 builds/%/zephyr/zephyr.hex: $(DEPS)
