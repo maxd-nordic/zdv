@@ -1,22 +1,6 @@
 # SPDX-License-Identifier: Apache-2.0
 TARGETS = \
-	FRDM-K22F \
-	FRDM-K64F \
-	FRDM-K82F \
-	FRDM-KW41Z \
-	KL25Z \
-	LPCXpresso54114 \
-	LPCXpresso55S69 \
-	Microbit \
-	Microbitv2 \
-	MIMXRT1020 \
-	MIMXRT1050 \
-	MIMXRT1060 \
-	MIMXRT1170 \
-	Nordic-nRF51-DK \
-	Nordic-nRF52-DK \
-	Nordic-nRF52840-DK \
-	ST-Nucleo-F207ZG \
+	Thingy91 \
 
 DIST = dist
 DEPS = \
